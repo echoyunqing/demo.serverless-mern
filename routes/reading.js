@@ -1,9 +1,9 @@
 require('es6-promise').polyfill()
 require('isomorphic-fetch')
 
-const REPO_OWNER = 'jimmylv'
+const REPO_OWNER = 'xuexiaoao'
 const REPO_NAME = 'reading'
-const REPO_ID = 91649130
+const REPO_ID = 107835589
 
 module.exports = (app) => {
   app.post('/reading', (req, res) => {
@@ -31,7 +31,7 @@ module.exports = (app) => {
           () => console.info(`[END] Set estimate successful! ${html_url}`),
           (e) => console.error(`[END] Failed to set estimate! ${html_url}`, e),
         )
-        fetch(`https://api.zenhub.io/v4/reports/release/591dc19e81a6781f839705b9/items/issues?access_token=${ZENHUB_ACCESS_TOKEN_V4}`, {
+        fetch(`https://api.zenhub.io/v4/reports/release/59ec29a2bedf0a4d94322b26/items/issues?access_token=${ZENHUB_ACCESS_TOKEN_V4}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `add_issues%5B0%5D%5Bissue_number%5D=${number}&add_issues%5B0%5D%5Brepo_id%5D=${REPO_ID}`,
@@ -54,7 +54,7 @@ module.exports = (app) => {
     let keyword = encodeURIComponent(title.replace(/\s/g, '+'))
     console.info('[KEYWORD]', keyword)
 
-    fetch(`https://api.github.com/search/issues?q=${keyword}%20repo:jimmylv/reading`)
+    fetch(`https://api.github.com/search/issues?q=${keyword}%20repo:xuexiaoao/reading`)
       .then(response => response.json())
       .then(data => {
         console.info('[RESULT]', data)
@@ -104,7 +104,7 @@ module.exports = (app) => {
     let keyword = encodeURIComponent(title.replace(/\s/g, '+'))
     console.info('[KEYWORD]', keyword)
 
-    fetch(`https://api.github.com/search/issues?q=${keyword}%20repo:jimmylv/reading%20is:open`)
+    fetch(`https://api.github.com/search/issues?q=${keyword}%20repo:xuexiaoao/reading%20is:open`)
       .then(response => response.json())
       .then(data => {
         console.info('[RESULT]', data)
