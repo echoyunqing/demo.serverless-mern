@@ -99,7 +99,8 @@ module.exports = (app) => {
 
     const title = req.query.title
     const note = req.body.note
-    console.info('[BEGIN]', { title, note })
+    const highlightedText = req.body.highlightedText
+    console.info('[BEGIN]', { title, note, highlightedText })
 
     let keyword = encodeURIComponent(title.replace(/\s/g, '+'))
     console.info('[KEYWORD]', keyword)
@@ -113,7 +114,9 @@ module.exports = (app) => {
             fetch(`${url}/comments?access_token=${GITHUB_ACCESS_TOKEN}`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ body: `> ${note}` }),
+              body: JSON.stringify({ body: `> ${highlightedText}
+
+${note}` }),
             })
               .then(() => console.info(`[END] added comment successful! ${html_url}`))
               .catch(err => res.json('error', { error: err })))
